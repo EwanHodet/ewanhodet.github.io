@@ -1,0 +1,699 @@
+:root {
+  --couleur-barre:       #F3E600;
+  --couleur-fond-barre:  #333;
+
+  --fond:               #f0efeb;
+  --fond-carte:         #ffffff;
+  --texte:              #1a1a1a;
+  --texte-discret:      #666;
+  --bordure:            rgba(0,0,0,0.10);
+  --bordure-survol:     rgba(0,0,0,0.20);
+  --barre-inactive:     rgba(0,0,0,0.18);
+  --barre-active:       #1a1a1a;
+  --fond-bouton-theme:  rgba(0,0,0,0.08);
+  --accent:             #1a1a1a;
+  --texte-accent:       #ffffff;
+  --overlay-bg:         rgba(240,239,235,0.92); /* clair */
+
+  --duree: 0.4s;
+}
+
+body.sombre {
+  --fond:               #111110;
+  --fond-carte:         #1c1c1b;
+  --texte:              #f0efeb;
+  --texte-discret:      #888;
+  --bordure:            rgba(255,255,255,0.08);
+  --bordure-survol:     rgba(255,255,255,0.18);
+  --barre-inactive:     rgba(255,255,255,0.20);
+  --barre-active:       #f0efeb;
+  --fond-bouton-theme:  rgba(255,255,255,0.08);
+  --accent:             #f0efeb;
+  --texte-accent:       #111110;
+  --overlay-bg:         rgba(10,10,10,0.93); /* sombre */
+}
+
+/* ============================================================
+   RESET & CONFIG GLOBALE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar { display: none; }
+
+body {
+  background-color: var(--fond);
+  color: var(--texte);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  transition: background-color var(--duree), color var(--duree);
+  min-height: 100vh;
+}
+
+::selection { background: var(--texte); color: var(--fond); }
+a { text-decoration: none; color: inherit; }
+li { list-style: none; }
+
+/* ============================================================
+   OVERLAY IMAGE (popup)
+   ============================================================ */
+.overlay-image {
+  display: none; /* caché par défaut */
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(10px);
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  /* quand JS met display:flex, l'animation se déclenche */
+  animation: fonduOverlay 0.25s ease;
+}
+
+/* JS ajoute la classe .visible pour afficher l'overlay */
+.overlay-image.visible {
+  display: flex;
+}
+
+@keyframes fonduOverlay {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* L'image dans le popup — max 90% de l'écran, bords arrondis */
+.overlay-image img {
+  max-width: 90vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* Bouton fermer en haut à droite de l'overlay */
+.overlay-fermer {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  color: var(--texte);
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.overlay-fermer:hover { background: var(--bordure-survol); }
+
+/* Images avec curseur "zoom" pour signaler qu'elles sont cliquables */
+img.cliquable {
+  cursor: zoom-in;
+  transition: opacity 0.2s;
+}
+img.cliquable:hover { opacity: 0.85; }
+
+#lastRaceHomePage{
+  width: 90px;
+}
+
+/* ============================================================
+   BOUTON THÈME
+   ============================================================ */
+.bouton-theme {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--fond-bouton-theme);
+  border: 1px solid var(--bordure);
+  border-radius: 50px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--texte);
+  transition: var(--duree), border-color var(--duree);
+  backdrop-filter: blur(8px);
+}
+.bouton-theme:hover { background: var(--bordure); }
+body:not(.sombre) .lune { display: none; }
+body.sombre .soleil    { display: none; }
+
+/* ============================================================
+   NAVIGATION LATÉRALE
+   ============================================================ */
+.nav-laterale {
+  position: fixed;
+  right: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.lien-nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.label-nav {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texte);
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+}
+
+.barre-nav {
+  display: block;
+  width: 3px;
+  height: 36px;
+  border-radius: 2px;
+  background: var(--barre-inactive);
+  transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+.lien-nav:hover .label-nav { opacity: 1; transform: translateX(0); }
+.lien-nav:hover .barre-nav  { background: var(--barre-active); height: 48px; }
+.lien-nav.actif .barre-nav  { background: var(--barre-active); height: 56px; width: 5px; }
+.lien-nav.actif .label-nav  { opacity: 0.4; transform: translateX(0); }
+
+/* ============================================================
+   EN-TÊTE
+   ============================================================ */
+.entete-site {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 28px 60px;
+  z-index: 10;
+}
+
+.entete-site nav ul {
+  margin-left: 50px;
+  display: flex;
+  gap: 32px;
+}
+
+.entete-site nav a {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--texte-discret);
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+.entete-site nav a:hover { color: var(--texte); }
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 60px 80px 120px;
+  position: relative;
+}
+
+.contenu-section { max-width: 800px; }
+
+.titre-section {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 48px;
+  position: relative;
+}
+.titre-section::after {
+  content: '';
+  display: block;
+  margin-top: 12px;
+  width: 40px;
+  height: 3px;
+  background: var(--texte);
+  border-radius: 2px;
+  transition: background var(--duree);
+}
+
+/* ============================================================
+   ACCUEIL
+   ============================================================ */
+#accueil { padding-left: 120px; background-image: none; }
+
+body.sombre #accueil {
+  background-image: linear-gradient(rgba(17,17,17,0.8), rgba(19,18,18,0.8)), url(coucherDeSoleil.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.zone-accueil { max-width: 680px; }
+
+.zone-accueil h1 {
+  font-size: clamp(48px, 7vw, 84px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.sous-titre {
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 400;
+  color: var(--texte-discret);
+  margin-bottom: 24px;
+}
+
+.description {
+  font-size: 16px;
+  color: var(--texte-discret);
+  max-width: 520px;
+  line-height: 1.75;
+  margin-bottom: 40px;
+}
+
+.bouton-principal {
+  display: inline-block;
+  padding: 12px 28px;
+  background: var(--accent);
+  color: var(--texte-accent);
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s;
+}
+.bouton-principal:hover { opacity: 0.8; }
+
+/* ============================================================
+   PROJETS
+   ============================================================ */
+.liste-projets {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.categorie {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--texte-discret);
+  margin-bottom: 4px;
+}
+
+/* La carte est en colonne pour accueillir le panneau détail en dessous */
+.carte-projet {
+  display: flex;
+  flex-direction: column;
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-radius: 8px;
+  overflow: hidden; /* important : le détail reste dans la carte */
+  transition: border-color 0.2s, transform 0.2s;
+}
+.carte-projet:hover { border-color: var(--bordure-survol); }
+
+/* La partie principale (image + texte) reste en ligne */
+.carte-projet > .image-projet,
+.carte-projet > img.image-projet {
+  flex-shrink: 0;
+}
+
+
+/* Astuce : on fait un wrapper implicite via le premier niveau de la carte.
+   Pour ça, .carte-projet utilise flex column, mais l'image+infos sont groupés. */
+
+/* En réalité la structure HTML met image et infos directement dans article.
+   On les groupe visuellement avec cet ordre flex : */
+.carte-projet {
+  padding: 28px;
+  gap: 0;
+}
+
+/* Image + infos côte à côte dans la partie haute */
+.carte-projet > .image-projet,
+.carte-projet > img.image-projet {
+  width: 160px;
+  height: 110px;
+  border-radius: 4px;
+  object-fit: cover;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bordure);
+  font-size: 12px;
+  color: var(--texte-discret);
+  text-align: center;
+  padding: 8px;
+  flex-shrink: 0;
+  float: left;        /* image flotte à gauche */
+  margin-right: 28px;
+  margin-bottom: 12px;
+}
+
+.infos-projet {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* overflow:hidden pour contenir le float */
+  overflow: hidden;
+}
+
+.infos-projet h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.etiquettes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.etiquette {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border: 1px solid var(--bordure);
+  border-radius: 50px;
+  color: var(--texte-discret);
+}
+
+/* Bouton "Voir le détail" — plus de <a>, c'est un <button> maintenant */
+.bouton-discret {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texte);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  transition: opacity 0.2s;
+  width: fit-content;
+}
+.bouton-discret:hover { opacity: 0.6; }
+
+/* ---- Panneau de détail (toggle) ---- */
+
+/* Le panneau est caché avec height:0 + overflow:hidden.
+   Quand la carte a la classe .ouvert, on met height:auto via une animation JS. */
+
+.detail-projet {
+  max-height: 0;
+  overflow: hidden;
+  /* On ne peut pas animer vers height:auto directement en CSS pur.
+     On utilise max-height avec une grande valeur pour simuler l'ouverture.
+     L'animation est volontairement un peu plus lente à la fermeture (cubic-bezier). */
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Séparé de la zone image+infos par une ligne discrète */
+  border-top: 0px solid var(--bordure);
+  clear: both; /* libère le float de l'image */
+}
+
+/* Quand la carte est ouverte, on laisse le max-height s'étendre */
+.carte-projet.ouvert .detail-projet {
+  max-height: 1000px; /* valeur supérieure à tout contenu possible */
+  border-top-width: 1px;
+}
+
+.detail-contenu {
+  padding: 24px 0 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detail-bloc h4 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--texte-discret);
+  margin-bottom: 8px;
+}
+
+.detail-bloc p,
+.detail-bloc ul {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--texte);
+}
+
+.detail-bloc ul {
+  padding-left: 18px;
+  list-style: disc;
+}
+
+.detail-bloc ul li { margin-bottom: 4px; }
+
+.detail-bloc code {
+  font-size: 13px;
+  background: var(--bordure);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+}
+
+/* Petite galerie d'images dans le détail */
+.detail-galerie {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.detail-galerie img {
+  width: 240px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--bordure);
+}
+
+/* ============================================================
+   COMPÉTENCES
+   ============================================================ */
+#competences.section {
+  background-image: none;
+  display: grid;
+  grid-template-columns: 2fr 1.5fr;
+  gap: 0px;
+}
+
+body.sombre #competences {
+  background-image: linear-gradient(rgba(17,17,17,0.8), rgba(19,18,18,0.8)), url(paysageJaune.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.groupe-competences { margin-bottom: 50px; }
+
+.ligne-competence {
+  display: flex;
+  align-items: center;
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+
+.nom-competence { display: none; }
+
+.niveau {
+  position: relative;
+  background-color: var(--couleur-fond-barre);
+  width: 350px;
+  height: 30px;
+  transform: skew(30deg);
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+.niveau::before {
+  --largeur-cible: calc(var(--p) * 1%);
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 100%;
+  background-color: var(--couleur-barre);
+  z-index: 0;
+  animation: remplissage 0.6s forwards linear;
+}
+
+.niveau::after {
+  counter-reset: progress var(--p);
+  content: counter(progress) '%';
+  color: var(--couleur-fond-barre);
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%) skewX(-30deg);
+  z-index: 1;
+}
+
+.niveau .range__label {
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: 0;
+  transform: skew(-30deg) translateY(-100%);
+  line-height: 1.5;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--texte);
+  white-space: nowrap;
+  transition: color var(--duree);
+}
+
+@keyframes remplissage {
+  to { width: var(--largeur-cible); }
+}
+
+.sectionProfil{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 10px;
+  padding-bottom: 25px;
+  margin-bottom: 10px;
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.liste-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 480px;
+}
+
+.carte-contact {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-radius: 8px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.carte-contact:hover { border-color: var(--bordure-survol); transform: translateX(4px); }
+
+.icone-contact {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--bordure);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--texte);
+  flex-shrink: 0;
+}
+
+.nom-contact  { font-size: 15px; font-weight: 600; color: var(--texte); }
+.info-contact { font-size: 13px; color: var(--texte-discret); }
+
+
+/* ============================================================
+   NAVBAR MOBILE (cachée en desktop, visible en mobile)
+   ============================================================ */
+.nav-mobile {
+  display: none;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .section { padding: 80px 24px 60px 24px; }
+  #accueil  { padding-left: 24px; }
+  .entete-site { padding: 20px 24px; }
+  .entete-site nav ul { gap: 16px; }
+  .nav-laterale { display: none; }
+  .entete-site { display: none; }
+
+  .nav-mobile {
+    display: flex;
+    position: fixed;  
+    top: 21px;
+    left: 55%;
+    transform: translateX(-50%);
+    z-index: 900;
+    justify-content: center;
+    gap: 6px;
+    padding: 5px;
+    background: var(--fond-bouton-theme);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--bordure);
+    border-radius: 50px;
+  }
+
+  .nav-mobile a {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texte);
+    padding: 5px 11px;
+    border-radius: 50px;
+    border: 1px solid var(--bordure);
+    background: var(--fond-bouton-theme);
+    transition: background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav-mobile a:hover {
+    background: var(--bordure);
+    border-color: var(--bordure-survol);
+  }
+
+  .carte-projet > .image-projet,
+  .carte-projet > img.image-projet {
+    float: none;
+    width: 100%;
+    height: 140px;
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+
+  .niveau { width: 200px; }
+
+  #competences.section {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding-left: 10%;
+  }
+}

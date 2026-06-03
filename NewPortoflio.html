@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="fr">
+ 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="NewStyle.css">
+  <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/128/10856/10856864.png">
+  <title>PortFolio - Ewan Hodet</title>
+</head>
+ 
+<body class="sombre">
+
+  <!-- Navbar mobile (visible uniquement en responsive) -->
+  <nav class="nav-mobile">
+    <a href="#accueil">Accueil</a>
+    <a href="#projets">Projets</a>
+    <a href="#competences">Compétences</a>
+    <a href="#contact">Contact</a>
+  </nav>
+ 
+  <!-- Bouton pour basculer mode sombre / clair -->
+  <button class="bouton-theme" id="boutonTheme">
+    <span class="soleil">☀</span>
+    <span class="lune">☾</span>
+  </button>
+
+  <!-- Overlay image (popup plein écran) -->
+  <div class="overlay-image" id="overlayImage">
+    <button class="overlay-fermer" id="overlayFermer">✕</button>
+    <img id="overlayImg" src="" alt="">
+  </div>
+ 
+  <!-- Navigation latérale : chaque lien contient un texte et une barre -->
+  <nav class="nav-laterale">
+    <a href="#accueil" class="lien-nav actif" data-section="accueil">
+      <span class="label-nav">Accueil</span>
+      <span class="barre-nav"></span>
+    </a>
+    <a href="#projets" class="lien-nav" data-section="projets">
+      <span class="label-nav">Projets</span>
+      <span class="barre-nav"></span>
+    </a>
+    <a href="#competences" class="lien-nav" data-section="competences">
+      <span class="label-nav">Compétences</span>
+      <span class="barre-nav"></span>
+    </a>
+    <a href="#contact" class="lien-nav" data-section="contact">
+      <span class="label-nav">Contact</span>
+      <span class="barre-nav"></span>
+    </a>
+  </nav>
+ 
+ 
+  <!-- ===== ACCUEIL ===== -->
+  <section id="accueil" class="section">
+ 
+    <header class="entete-site">
+      <nav>
+        <ul>
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#projets">Projets</a></li>
+          <li><a href="#competences">Compétences</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+ 
+    <div class="zone-accueil">
+      <h1>Ewan Hodet</h1>
+      <h2 class="sous-titre">Étudiant en BUT Informatique &mdash; Grenoble</h2>
+      <p class="description">
+        Passionné par le développement web et la conception logicielle,
+        je suis en première année de BUT Informatique à l'IUT Grenoble.
+        À la recherche de projets stimulants pour mettre en pratique
+        mes compétences et continuer à progresser.
+      </p>
+      <a href="#projets" class="bouton-principal">Voir mes projets</a>
+    </div>
+ 
+  </section>
+ 
+ 
+  <!-- ===== PROJETS ===== -->
+  <section id="projets" class="section">
+    <div class="contenu-section">
+      <h2 class="titre-section">Projets</h2>
+ 
+      <div class="liste-projets">
+
+        <!-- ###### PROJET PRO ###### -->
+        <h3 class="categorie">Professionnels</h3>
+
+        <!-- ====== PROJET 1 : Last Race ====== -->
+        <article class="carte-projet">
+          <img
+            class="image-projet cliquable"
+            src="CaptureSiteAnglais-ProductPage.png"
+            alt="Capture du site Last Race — ProductPage"
+          />
+          <div class="infos-projet">
+            <h3>Last Race — Site web en équipe</h3>
+            <p>
+              Dans le cadre d'un projet scolaire simulant une relation client / développeur,
+              j'ai co-conçu un site e-commerce fictif de vélos extrêmes en anglais,
+              avec des contraintes réelles : cahier des charges, dates de rendu, itérations
+              suite aux retours clients et présentation finale devant classe.
+            </p>
+            <div class="etiquettes">
+              <span class="etiquette">HTML</span>
+              <span class="etiquette">CSS</span>
+              <span class="etiquette">JavaScript</span>
+            </div>
+            <!-- Le bouton ne redirige plus, il déclenche le toggle via JS -->
+            <button class="bouton-discret bouton-detail" type="button">Voir le détail →</button>
+          </div>
+
+          <!-- Panneau de détail (caché par défaut, s'ouvre vers le bas) -->
+          <div class="detail-projet">
+            <div class="detail-contenu">
+
+              <div class="detail-bloc">
+                <h4>🎯 Contexte & objectifs</h4>
+                <p>
+                  Projet de 1ère année de BUT Informatique — cours d'anglais professionnel.
+                  L'objectif était de simuler une vraie commande client : l'équipe cliente
+                  définissait ses besoins, l'équipe développeur devait y répondre en livrant
+                  un site fonctionnel, en communiquant exclusivement en anglais (emails,
+                  réunions, présentation finale).
+                </p>
+              </div>
+
+              <div class="detail-bloc">
+                <h4>🛠️ Ce que j'ai réalisé</h4>
+                <ul>
+                  <li>4 pages HTML complètes : Home, Products, Insurance, Payment</li>
+                  <li>Système de carousel JavaScript pour les produits</li>
+                  <li>Configurateur de vélo custom avec dropdowns filtrés</li>
+                  <li>Page de paiement avec récapitulatif dynamique (localStorage)</li>
+                  <li>Design responsive avec burger menu mobile</li>
+                  <li>CSS partagé (<code>communForAll.css</code>) + CSS spécifique par page</li>
+                </ul>
+              </div>
+
+              <div class="detail-bloc">
+                <h4>💡 Ce que j'ai appris</h4>
+                <p>
+                  Ce projet m'a permis de vraiment comprendre la séparation des responsabilités
+                  entre HTML, CSS et JS. Travailler avec un "client" fictif m'a aussi appris à
+                  lire un cahier des charges, à me rendre du gain de temps qu'on y gagne et à
+                  présenter son travail de façon claire et professionnelle.
+                  La gestion du <code>localStorage</code> pour passer des données entre pages
+                  était un vrai défi — et une vraie satisfaction une fois en place.
+                </p>
+              </div>
+
+              <div class="detail-galerie">
+                <img class="cliquable" src="CaptureSiteAnglais-ProductPage.png" alt="ProductPage — Last Race" />
+                <img class="cliquable" id="lastRaceHomePage" src="CaptureSiteAnglais-HomePage.png" alt="HomePage — Last Race"/>
+                <img class="cliquable" src="CaptureSiteAnglais-InsurancePage.png" alt="InsurancePage — Last Race"/>
+              </div>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- ====== PROJET 2 : ChatBot ====== -->
+        <article class="carte-projet">
+          <img
+            class="image-projet cliquable"
+            src="CaptureChatbot.png"
+            alt="Capture du Chatbot"
+          />
+          <div class="infos-projet">
+            <h3>SAE ChatBot — Agent conversationnel en Java</h3>
+            <p>
+              Développement d'un agent conversationnel capable de répondre à des questions
+              de culture générale, en comparant une approche naïve (recherche séquentielle)
+              à une approche optimisée par index inversé — avec un gain de vitesse mesuré
+              à plus de 6 000×.
+            </p>
+            <div class="etiquettes">
+              <span class="etiquette">Java</span>
+              <span class="etiquette">Algorithmique</span>
+              <span class="etiquette">Index inversé</span>
+            </div>
+            <button class="bouton-discret bouton-detail" type="button">Voir le détail →</button>
+          </div>
+ 
+          <div class="detail-projet">
+            <div class="detail-contenu">
+ 
+              <div class="detail-bloc">
+                <h4>🎯 Contexte & objectifs</h4>
+                <p>
+                  Projet de 1ère année de BUT Informatique, réalisé en binôme.
+                  L'objectif était de construire un ChatBot capable de répondre à des questions en langage naturel, 
+                  en recherchant efficacement des réponses candidates dans une base de données.
+                  Le cœur du projet : comparer deux approches algorithmiques et mesurer concrètement leur différence de performance.
+                </p>
+              </div>
+ 
+              <div class="detail-bloc">
+                <h4>🛠️ Ce que j'ai réalisé</h4>
+                <ul>
+                  <li><strong>Prétraitement linguistique</strong> des questions et réponses — <code>decoupeEnMots</code>, <code>calculForme</code>  pour : (découpage, formes canoniques, thésaurus)</li>
+                  <li><strong>Construction d'un index inversé</strong> — <code>constructionIndexReponses</code> et <code>constructionIndexFormes</code> pour retrouver rapidement les réponses candidates</li>
+                  <li><strong>Recherche & sélection</strong> — <code>constructionReponsesCandidates</code> via l'index, <code>formeQuestionReponseExiste</code> pour vérifier la compatibilité en complexité minimale</li>
+                  <li><strong>Apprentissage</strong> — <code>integrerNouvelleReponse</code> & <code>integrerNouvelleQuestionReponse</code> pour enrichir la base dynamiquement</li>
+                </ul>
+              </div>
+ 
+              <div class="detail-bloc">
+                <h4>📊 Analyse de complexité</h4>
+                <p>
+                  La vraie valeur ajoutée du projet était la comparaison rigoureuse des deux approches.
+                </p>
+                <p>
+                  L'approche indexée utilise une recherche dichotomique dans l'index puis une fusion de listes triées :
+                  <code>C_index ≈ nmq × log(nmformes) + (nmq - 1) × 2 × nrpm</code>.
+                  Sur un exemple concret avec 100 000 réponses, l'approche naïve nécessite
+                  1 500 000 comparaisons contre ~250 pour l'approche indexée —
+                  soit un <strong>facteur d'accélération de 6 000×</strong>.
+                </p>
+              </div>
+ 
+              <div class="detail-bloc">
+                <h4>💡 Ce que j'ai appris</h4>
+                <p>
+                  Ce projet m'a fait comprendre de manière très concrète pourquoi la structure
+                  des données change tout. Coder l'approche naïve d'abord, puis la voir devenir
+                  obsolète face à l'index inversé, c'est une leçon d'algorithmique qu'on ne
+                  retient pas de la même façon dans un cours théorique.
+                  J'ai aussi appris à rédiger une analyse de complexité formelle et à défendre
+                  des choix techniques à l'écrit — compétence utile bien au-delà du projet.
+                </p>
+              </div>
+ 
+            </div>
+          </div>
+        </article>
+ 
+        <!-- ====== PROJET 3 : Nettoyage BDD ====== -->
+        <article class="carte-projet">
+          <img class="image-projet cliquable" src="CaptureNettoyageDeDonnées.png" alt="Capture — Nettoyage de données"/>
+          <div class="infos-projet">
+            <h3>Nettoyage d'une base de données</h3>
+            <p>
+              Exploration et nettoyage d'une base de données alimentaire open source (Open Food Facts),
+              dans le cadre d'une étude sur le lien entre nutriscore et variables nutritionnelles pour les céréales vendues aux États-Unis.
+            </p>
+            <div class="etiquettes">
+              <span class="etiquette">SQL</span>
+              <span class="etiquette">PostgreSQL</span>
+              <span class="etiquette">Rstudio</span>
+              <span class="etiquette">Data Science</span>
+            </div>
+            <button class="bouton-discret bouton-detail" type="button">Voir le détail →</button>
+          </div>
+
+          <div class="detail-projet">
+            <div class="detail-contenu">
+              <div class="detail-bloc">
+                <h4>🎯 Contexte & objectifs</h4>
+                <p>
+                  À partir de la base <strong>Open Food Facts</strong> (données libres, donc incomplètes et mal renseignées), l'objectif était de
+                  produire un jeu de données propre pour répondre à une question précise :
+                  Quel lien entre le nutriscore (A à E) et les variables nutritionnelles pour les céréales vendues aux États-Unis ?
+                </p>
+              </div>
+              <div class="detail-bloc">
+                <h4>🛠️ Ce que j'ai réalisé</h4>
+                <ul>
+                  <li><strong>Filtrage et dédoublonnage</strong> —  des entrées via <code>regex</code> et <code>DISTINCT ON</code></li>
+                  <li><strong>Contraintes nutritionnelles logiques</strong> — (cohérence des sous-ensembles, valeurs entre 0 et 100g)</li>
+                  <li><strong>Extraction de booléens</strong> — (bio, vegan, huile de palme) depuis les tags texte</li>
+                  <li><strong>Export CSV</strong> — pour la phase statistique sous <code>RStudio</code></li>
+                </ul>
+              </div>
+              <div class="detail-bloc">
+                <h4>💡 Ce que j'ai appris</h4>
+                <p>
+                  Ce projet m'a confronté à la réalité des données "du monde réel" : sales, incomplètes, parfois incohérentes. Avant de pouvoir analyser quoi que ce soit,
+                  il faut d'abord nettoyer — et c'est souvent la partie la plus longue. J'ai appris à écrire des requêtes SQL défensives 
+                  <code>(regex, ILIKE, CASE, DISTINCT ON)</code> et à justifier chaque choix de filtrage dans un compte-rendu.
+                </p>
+              </div>
+              <div class="detail-galerie">
+                <img class="cliquable" src="CaptureNutriScore.png" alt="Capture du tableau NutriScore"/>
+                <img class="cliquable" src="CaptureSqlNutriScore.png" alt="Capture du code SQL pour le NutriScore"/>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ====== PROJET 4 : Guide Debian ====== -->
+        <article class="carte-projet">
+          <img class="image-projet cliquable" src="CaptureGuideDebian.png" alt="Capture du guide Débian"/>
+          <div class="infos-projet">
+            <h3>Guide d'installation — Serveur Debian 13</h3>
+            <p>
+              Rédaction d'un guide technique complet en anglais pour l'installation
+              d'un serveur Debian 13 headless sous QEMU/KVM, avec Apache, PostgreSQL
+              et PHP — incluant captures d'écran, commandes shell et explications pédagogiques.
+            </p>
+            <div class="etiquettes">
+              <span class="etiquette">Linux</span>
+              <span class="etiquette">Debian</span>
+              <span class="etiquette">Apache</span>
+              <span class="etiquette">PostgreSQL</span>
+              <span class="etiquette">PHP</span>
+            </div>
+            <button class="bouton-discret bouton-detail" type="button">Voir le détail →</button>
+          </div>
+
+          <div class="detail-projet">
+            <div class="detail-contenu">
+
+              <div class="detail-bloc">
+                <h4>🎯 Contexte & objectifs</h4>
+                <p>
+                  Projet d'Administration système. L'objectif était double : installer
+                  un serveur web fonctionnel sur une machine virtuelle Debian 13 headless
+                  (sans interface graphique), puis rédiger un guide d'installation complet
+                  en anglais, avec captures d'écran et explications, reproductible par n'importe
+                  qui depuis zéro.
+                </p>
+              </div>
+
+              <div class="detail-bloc">
+                <h4>🛠️ Ce que j'ai réalisé</h4>
+                <ul>
+                  <li><strong>Installation de Debian 13</strong> sous <code>QEMU/KVM </code>avec port forwarding <code>SSH / HTTP / PostgreSQL</code></li>
+                  <li><strong>Configuration et vérification</strong> d'<code>Apache</code>, <code>PostgreSQL</code> et <code>PHP</code> depuis le shell</li>
+                  <li><strong>Mise en place</strong> de <code>PhpPgAdmin</code> et accès distant depuis la machine hôte</li>
+                  <li><strong>Rédaction d'un guide</strong> de 19 pages en anglais : étapes détaillées, commandes shell, captures d'écran annotées</li>
+                  <li><strong>Annexe autonomie :</strong> reproduire l'environnement entier sur <code>clé USB</code> sans les scripts de l'IUT</li>
+                </ul>
+              </div>
+
+              <div class="detail-bloc">
+                <h4>💡 Ce que j'ai appris</h4>
+                <p>
+                  Ce projet m'a donné une vraie première expérience d'administration système Linux.
+                  Travailler en mode headless — pas d'interface graphique, tout passe par le terminal —
+                  oblige à comprendre ce qu'on fait plutôt que de cliquer. Rédiger le guide en anglais
+                  a aussi été formateur : expliquer une procédure technique clairement à quelqu'un
+                  qui ne connaît pas l'environnement, c'est un exercice à part entière.
+                </p>
+              </div>
+              <div class="detail-galerie">
+                <img class="cliquable" src="CaptureDebianInstallation.png" alt="Capture de l'installation de Débian"/>
+                <img class="cliquable" src="CapturePageWebApache.png" alt="Capture de la page web d'Apache"/>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ###### PROJET PERSO ###### -->
+        <h3 class="categorie">Personnels</h3>
+ 
+        <!-- ====== PROJET PERSO 1 : Écriture à plusieurs mains ====== -->
+        <article class="carte-projet">
+          <div class="image-projet"><span>Capture du projet</span></div>
+          <div class="infos-projet">
+            <h3>Projet d'écriture à plusieurs mains</h3>
+            <p>
+              Co-écriture d'un livre de légendes bretonnes et réalisation d'un court-métrage
+              destiné aux écoles primaires — un projet éducatif mené sur deux ans
+              avec un auteur local et un cinéaste.
+            </p>
+            <div class="etiquettes">
+              <span class="etiquette">Imaginatif</span>
+              <span class="etiquette">Curieux</span>
+              <span class="etiquette">Passionné</span>
+              <span class="etiquette">Responsable</span>
+            </div>
+            <button class="bouton-discret bouton-detail" type="button">Voir le détail →</button>
+          </div>
+
+          <div class="detail-projet">
+            <div class="detail-contenu">
+
+              <div class="detail-bloc">
+                <h4>🎯 Contexte</h4>
+                <p>
+                  Projet tuteuré réalisé en 2018-2019, sur deux années scolaires, durant mes années
+                  de primaire. Mon meilleur ami et moi avons rencontré René Carletto, un auteur local,
+                  avec qui nous avons décidé de lancer un projet d'écriture destiné aux écoles.
+                  Le principe : écrire des débuts d'histoires inspirées des légendes de Bretagne,
+                  puis les confier aux élèves pour qu'ils écrivent la suite à leur tour.
+                  Un cinéaste, Sylvain Bresson, nous a rejoints pour la partie court-métrage.
+                </p>
+              </div>
+
+              <div class="detail-bloc">
+                <h4>🛠️ Savoir-faire acquis</h4>
+                <ul>
+                  <li><strong>Écriture collaborative</strong> — construire une histoire à plusieurs mains</li>
+                  <li><strong>Réalisation d'illustrations</strong> pour le livre</li>
+                  <li>Participation à un <strong>court-métrage</strong> (prise de parole à l'oral)</li>
+                  <li><strong>Conception d'un projet</strong> à visée éducative</li>
+                  <li><strong>Exploration de terrain</strong> : visites de lieux légendaires de Bretagne,
+                  rencontres avec des hermites et doyens locaux</li>
+                </ul>
+              </div>
+
+              <div class="detail-bloc">
+                <h4>✨ Ce qui m'a plu</h4>
+                <p>
+                  Ce projet était vraiment vivifiant — découvrir des endroits insolites de la région,
+                  partager les histoires de gens passionnants, et voir tout ça se transformer en un vrai
+                  livre entre les mains des enfants. Réaliser un court-métrage à mon âge, écrire,
+                  illustrer : c'est une expérience qui m'a montré très tôt qu'un projet ambitieux
+                  est toujours possible quand les bonnes personnes se retrouvent autour d'une idée.
+                  <br>
+                  <em>ps : J'ai aussi travaillé avec sur un autre de ses livres (Ronan et son clan - en images jointes)</em>
+                </p>
+              </div>
+              <div class="detail-galerie">
+                <img class="cliquable" src="CaptureEnfantsProjetEcriture.jpeg" alt="Capture des du projet"/>
+                <img class="cliquable" src="CaptureRonanClan.jpg" alt="Capture d'un autre livre de René"/>
+              </div>
+            </div>
+          </div>
+        </article>
+ 
+        <!-- ====== PROJET PERSO 2 : Bénévolat Chapelle Sainte Marguerite ====== -->
+        <article class="carte-projet">
+          <img class="cliquable" src="CaptureChapelleStMarguerite.png" alt="Capture de la Chapelle Sainte Marguerite" width="160" height="110"/>
+          <div class="infos-projet">
+            <h3>Bénévole — Chapelle Sainte Marguerite</h3>
+            <p>
+              Missions bénévoles polyvalentes au sein d'une association de rénovation
+              et d'animation locale en Bretagne — entretien du site, organisation
+              de la fête annuelle, préparation de repas et projets manuels variés.
+            </p>
+            <div class="etiquettes">
+              <span class="etiquette">Organisé</span>
+              <span class="etiquette">Débrouillard</span>
+              <span class="etiquette">Créatif</span>
+              <span class="etiquette">Volontaire</span>
+              <span class="etiquette">Polyvalent</span>
+            </div>
+            <button class="bouton-discret bouton-detail" type="button">Voir le détail →</button>
+          </div>
+
+          <div class="detail-projet">
+            <div class="detail-contenu">
+              <div class="detail-bloc">
+                <h4>🎯 Contexte</h4>
+                <p>
+                  Engagement bénévole depuis 2023, sur une semaine intensive chaque été
+                  et plusieurs journées dans l'année, au sein de l'association de la
+                  Chapelle Sainte Marguerite à Sulniac (Bretagne). L'objectif principal
+                  de l'association est d'entretenir et rénover le site de la chapelle,
+                  les bénéfices des événements étant réinvestis dans la restauration
+                  (vitraux, plafond…). C'est mon grand-père, membre de longue date,
+                  qui m'a introduit à cette association.
+                </p>
+              </div>
+
+              <div class="detail-bloc">
+                <h4>🛠️ Savoir-faire acquis</h4>
+                <ul>
+                  <li><strong>Entretien</strong> d'espaces verts et <strong>mise en place</strong> de chapiteaux</li>
+                  <li><strong>Préparation</strong> de repas à grande échelle (marmites, rôtissoire)</li>
+                  <li><strong>Réalisation</strong> de mini-projets manuels (crèche de Noël, stands…)</li>
+                  <li><strong>Organisation</strong> et <strong>participation</strong> à des événements locaux (fête de la Pomme, fête annuelle)</li>
+                </ul>
+              </div>
+
+              <div class="detail-bloc">
+                <h4>✨ Ce qui m'a plu</h4>
+                <p>
+                  Ce qui me frappe le plus c'est la diversité des tâches — pas deux journées
+                  identiques. Cuisiner pour des dizaines de personnes, monter des structures,
+                  fabriquer une crèche : chaque mission mobilise des compétences différentes.
+                  Et surtout, c'est une expérience que je vis aux côtés de mon grand-père,
+                  ce qui la rend particulièrement précieuse. <br>
+                  <em>Dans l'image jointe on peut voir la chapelle illuminée avec la crèche que j'ai réalisé !</em>
+                </p>
+              </div>
+              <div class="detail-galerie">
+                <img class="cliquable" src="CaptureChapelleIlluminée.png" alt="Capture de la Chapelle illuminée"/>
+              </div>
+            </div>
+          </div>
+        </article>
+ 
+
+        <!-- ====== PROJET PERSO 3 : Stage Temple du Jeu ====== -->
+        <article class="carte-projet">
+          <img class="cliquable" src="CaptureTempleduJeu.jpeg" alt="Capture de la boutique" width="160" height="110"/>
+          <div class="infos-projet">
+            <h3>Stage vendeur — Temple du Jeu</h3>
+            <p>
+              Deux stages en immersion dans une boutique spécialisée jeux de société,
+              figurines et jeux de cartes à Vannes — une première expérience professionnelle
+              dans un univers que je connaissais et appréciais déjà.
+            </p>
+            <div class="etiquettes">
+              <span class="etiquette">À l'écoute</span>
+              <span class="etiquette">Curieux</span>
+              <span class="etiquette">Observateur</span>
+              <span class="etiquette">Ponctuel</span>
+            </div>
+            <button class="bouton-discret bouton-detail" type="button">Voir le détail →</button>
+          </div>
+
+          <div class="detail-projet">
+            <div class="detail-contenu">
+
+              <div class="detail-bloc">
+                <h4>🎯 Contexte</h4>
+                <p>
+                  Stage réalisé en 2022, renouvelé deux fois sur plusieurs semaines,
+                  au Temple du Jeu à Vannes — une PME spécialisée dans les jeux de société,
+                  jeux de cartes (Magic) et figurines (Warhammer). Mon père, fan de cet univers,
+                  connaissait les gérants depuis longtemps, ce qui m'a donné l'opportunité
+                  de les contacter. J'ai tellement apprécié la structure que j'ai renouvelé
+                  le stage de ma propre initiative.
+                </p>
+              </div>
+
+              <div class="detail-bloc">
+                <h4>🛠️ Savoir-faire acquis</h4>
+                <ul>
+                  <li>Accueil et conseil client — identifier les besoins et orienter vers le bon produit</li>
+                  <li>Vente et encaissement</li>
+                  <li>Entretien et organisation de l'espace de vente</li>
+                  <li>Réception et rangement de marchandise</li>
+                  <li>Prise en main d'anciens logiciels de gestion</li>
+                </ul>
+              </div>
+
+              <div class="detail-bloc">
+                <h4>✨ Ce qui m'a plu</h4>
+                <p>
+                  Découvrir le monde de la vente tout en restant dans un univers que je connaissais
+                  était idéal pour une première expérience. J'ai pu rencontrer des développeurs
+                  de jeux de société et échanger sur leurs projets, et même participer à des parties
+                  durant mes semaines de travail. C'était aussi ma toute première expérience
+                  d'autonomie et de liberté — premiers trajets seul, première vraie responsabilité.
+                </p>
+              </div>
+
+              <div class="detail-galerie">
+                <img class="cliquable" src="CaptureJeuxSociété.jpeg" alt="Capture des jeux de la boutique"/>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+ 
+ 
+  <!-- ===== COMPÉTENCES ===== -->
+  <section id="competences" class="section">
+    <div class="contenu-section">
+      <h2 class="titre-section">Compétences</h2>
+ 
+      <div class="groupe-competences">
+        <h3 class="categorie">Langages</h3>
+        <div class="ligne-competence">
+          <div class="niveau" style="--p:70"><div class="range__label">Python</div></div>
+        </div>
+        <div class="ligne-competence">
+          <div class="niveau" style="--p:75"><div class="range__label">HTML / CSS</div></div>
+        </div>
+        <div class="ligne-competence">
+          <div class="niveau" style="--p:20"><div class="range__label">JavaScript</div></div>
+        </div>
+        <div class="ligne-competence">
+          <div class="niveau" style="--p:65"><div class="range__label">Java</div></div>
+        </div>
+        <div class="ligne-competence">
+          <div class="niveau" style="--p:55"><div class="range__label">SQL</div></div>
+        </div>
+      </div>
+ 
+      <div class="groupe-competences">
+        <h3 class="categorie">Outils & Environnements</h3>
+        <div class="ligne-competence">
+          <div class="niveau" style="--p:60"><div class="range__label">Git / GitHub</div></div>
+        </div>
+        <div class="ligne-competence">
+          <div class="niveau" style="--p:75"><div class="range__label">VS Code</div></div>
+        </div>
+        <div class="ligne-competence">
+          <div class="niveau" style="--p:80"><div class="range__label">Canva</div></div>
+        </div>
+        <div class="ligne-competence">
+          <div class="niveau" style="--p:55"><div class="range__label">Linux (Debian)</div></div>
+        </div>
+      </div>
+
+      <div class="groupe-competences">
+        <h3 class="categorie">Langues</h3>
+        <div class="ligne-competence">
+          <div class="niveau" style="--p:95"><div class="range__label">Français</div></div>
+        </div>
+        <div class="ligne-competence">
+          <div class="niveau" style="--p:75"><div class="range__label">Anglais</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contenu-section">
+      <h2 class="titre-section">Profil</h2>
+      <div class="groupe-competences">
+        <h3 class="categorie">Mes atouts</h3>
+        <div class="sectionProfil" style="width: 80%; margin-bottom: 30px;">
+          <p><span style="font-size: 25px;">🎯</span> <strong>Persévérance : </strong> Toujours aller au bout de ce que j'entreprends, apprendre de ses erreurs et relever des défis.</p>
+          <p><span style="font-size: 25px;">🎯</span> <strong>Sens du collectif :</strong> À l'aise dans le travail d'équipe, enrichi par mes expériences associatives et projets de groupe.</p>
+          <p><span style="font-size: 25px;">🎯</span> <strong>Curiosité & Apprentissage :</strong> Toujours motivé pour agrandir mes compétences et découvrir de nouvelles choses.</p>
+        </div>
+        
+        <h3 class="categorie">Mon parcours </h3>
+        <div class="sectionProfil" style="margin-bottom: 30px;">
+
+          <div style="display: flex; align-items: center; gap:5px;">
+          <img src="https://cdn-icons-png.flaticon.com/128/7108/7108023.png" width="30px"/>
+          <p><strong>Université</strong>, Iut2 Doyen Gosse - Grenoble (BUT Informatique)</p>
+          </div>
+          <div style="display: flex; align-items: center; gap:5px;">
+          <img src="https://cdn-icons-png.flaticon.com/128/7108/7108023.png" width="30px"/>
+          <p><strong>Lycée</strong>, St Paul - Vannes</p>
+          </div>
+          <div style="display: flex; align-items: center; gap:5px;">
+          <img src="https://cdn-icons-png.flaticon.com/128/7108/7108023.png" width="30px"/>
+          <p><strong>Collège</strong>, St Marie - Elven</p>
+          </div>
+
+        </div>
+        
+        <h3 class="categorie">Mes centres d'intérêts</h3>
+        <div class="sectionProfil" style="margin-bottom: 30px;">
+
+          <div style="display: flex; align-items: center; gap:5px;">
+          <img src="https://cdn-icons-png.flaticon.com/128/1635/1635265.png" width="30px"/>
+          <p><strong>Randonnée & Exploration</strong>, j'adore la nature et notre corps en a besoin !</p>
+          </div>
+          <div style="display: flex; align-items: center; gap:5px;">
+          <img src="https://cdn-icons-png.flaticon.com/128/1635/1635265.png" width="30px"/>
+          <p>l'<strong>Amour</strong>, la plus belle chose du monde :)</p>
+          </div>
+          <div style="display: flex; align-items: center; gap:5px;">
+          <img src="https://cdn-icons-png.flaticon.com/128/1635/1635265.png" width="30px"/>
+          <p><strong>Philosophie</strong>, j'aime prendre le temps de réfléchir et de comprendre les choses.</p>
+          </div>
+        </div>
+        
+        <h3 class="categorie">Et plus encore..</h3>
+        <div class="sectionProfil">
+          <div style="display: flex; align-items: center; gap:5px;">
+          <img src="Logo_Certificat-Voltaire.png" width="35px"/>
+          <p style="object-position: 0 50%;">Mon <strong>certificat Voltaire</strong> <span style="font-size: 12px; font-style: italic;">réalisé en 2025</span> :</p>
+          <img class="cliquable" src="certificat-voltaire.png" alt="Capture du certificat voltaire" width="12px" height="15px"/>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+ 
+ 
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="section">
+    <div class="contenu-section">
+      <h2 class="titre-section">Me retrouver</h2>
+ 
+      <div class="liste-contacts">
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="carte-contact">
+        <div class="icone-contact">in</div>
+          <div>
+          <p class="nom-contact">LinkedIn</p>
+          <p class="info-contact">Profil en cours de création</p>
+          </div>
+        </a>
+      
+        <a href="https://gricad-gitlab.univ-grenoble-alpes.fr/hodete" target="_blank" rel="noopener" class="carte-contact">
+          <div class="icone-contact">gh</div>
+          <div>
+            <p class="nom-contact">GitHub</p>
+            <p class="info-contact">Mes dépôts publics</p>
+          </div>
+        </a>
+ 
+        <a href="mailto:ewan.hodet@etu.univ-grenoble-alpes.fr" class="carte-contact">
+          <div class="icone-contact">@</div>
+          <div>
+            <p class="nom-contact">Email institutionnel</p>
+            <p class="info-contact">ewan.hodet@etu.univ-grenoble-alpes.fr</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+ 
+  <script src="script.js"></script>
+
+</body>
+</html>
