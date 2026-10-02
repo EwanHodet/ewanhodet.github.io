@@ -265,12 +265,14 @@ body.sombre .soleil    { display: none; }
    ============================================================ */
 #accueil { padding-left: 120px; background-image: url(montagneNeige.jpg); }
 
+/*
 body.sombre #accueil {
   background-image: linear-gradient(rgba(17,17,17,0.8), rgba(19,18,18,0.8)), url(coucherDeSoleil.jpeg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+*/
 
 body:not(.sombre) #accueil {
   background-image: red;
