@@ -273,10 +273,7 @@ body.sombre #accueil {
 }
 
 body:not(.sombre) #accueil {
-  background-image: url(montagneNeige.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image: red;
 }
 
 .zone-accueil { max-width: 680px; }
